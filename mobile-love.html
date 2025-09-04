@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>致我最爱的人</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    
+    <!-- 配置Tailwind自定义颜色 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        love: {
+                            light: '#FFB6C1',
+                            DEFAULT: '#FF69B4',
+                            dark: '#C71585',
+                        }
+                    },
+                    fontFamily: {
+                        romantic: ['"Dancing Script"', 'cursive'],
+                        main: ['"Montserrat"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- 引入Google字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-shadow {
+                text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+            }
+            .heart-beat {
+                animation: heartbeat 1.5s ease-in-out infinite;
+            }
+            .float {
+                animation: float 6s ease-in-out infinite;
+            }
+            .pulse {
+                animation: pulse 2s infinite;
+            }
+        }
+        
+        /* 动画定义 */
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            14% { transform: scale(1.1); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.1); }
+            70% { transform: scale(1); }
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 105, 180, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(255, 105, 180, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 105, 180, 0); }
+        }
+        
+        /* 基础样式 */
+        body {
+            background: linear-gradient(135deg, #fff0f5 0%, #ffe4e1 100%);
+            background-attachment: fixed;
+            overflow-x: hidden;
+            touch-action: manipulation; /* 优化触摸体验 */
+        }
+        
+        .heart-decoration {
+            position: absolute;
+            opacity: 0.5;
+            z-index: 0;
+        }
+        
+        /* 平滑滚动 */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body class="font-main text-gray-800 min-h-screen">
+    <!-- 背景爱心装饰 -->
+    <div id="hearts-container" class="fixed inset-0 pointer-events-none"></div>
+    
+    <!-- 主容器 -->
+    <div class="relative z-10 container mx-auto px-4 py-8 max-w-md">
+        <!-- 标题部分 -->
+        <header class="text-center mb-6 opacity-0" id="header">
+            <h1 class="font-romantic text-[clamp(2rem,12vw,3.5rem)] text-love-dark text-shadow mb-2">
+                致我最爱的人
+            </h1>
+            <div class="w-24 h-1 bg-love mx-auto rounded-full"></div>
+        </header>
+        
+        <!-- 主要内容区 -->
+        <main class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl p-5 mb-6 transform translate-y-10 opacity-0" id="main-content">
+            <div class="relative mb-6 rounded-xl overflow-hidden">
+                <img src="https://picsum.photos/id/237/600/400" alt="浪漫场景" class="w-full h-[220px] object-cover">
+                <div class="absolute -bottom-4 -right-4 bg-love text-white p-3 rounded-full heart-beat shadow-lg">
+                    <i class="fa fa-heart text-xl"></i>
+                </div>
+            </div>
+            
+            <div class="space-y-4 text-base md:text-lg leading-relaxed">
+                <p class="opacity-0" style="animation: fadeIn 0.8s ease-in forwards 0.5s; animation-fill-mode: both;">
+                    亲爱的，
+                </p>
+                <p class="opacity-0" style="animation: fadeIn 0.8s ease-in forwards 1s; animation-fill-mode: both;">
+                    第一次见到你，我的心就为你跳动。你的笑容像阳光一样温暖，你的声音像音乐一样动听。
+                </p>
+                <p class="opacity-0" style="animation: fadeIn 0.8s ease-in forwards 1.5s; animation-fill-mode: both;">
+                    和你在一起的每一刻，都是我生命中最美好的时光。无论是欢笑还是泪水，有你的陪伴，一切都变得有意义。
+                </p>
+                <p class="opacity-0 font-romantic text-xl md:text-2xl text-love-dark text-center my-6 py-2" style="animation: fadeIn 0.8s ease-in forwards 2s; animation-fill-mode: both;">
+                    我喜欢你，胜过一切言语能表达的程度。
+                </p>
+                <p class="opacity-0" style="animation: fadeIn 0.8s ease-in forwards 2.5s; animation-fill-mode: both;">
+                    你愿意...
+                </p>
+            </div>
+            
+            <!-- 互动按钮区域 - 优化触摸体验 -->
+            <div class="flex flex-col gap-4 mt-8 opacity-0" style="animation: fadeIn 0.8s ease-in forwards 3s; animation-fill-mode: both;">
+                <button id="yes-btn" class="bg-love hover:bg-love-dark text-white font-bold py-4 px-6 rounded-full shadow-lg transform transition-all duration-300 hover:scale-105 focus:outline-none pulse">
+                    <i class="fa fa-heart mr-2"></i>我愿意
+                </button>
+                <button id="no-btn" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-4 px-6 rounded-full shadow-lg transform transition-all duration-300 hover:scale-105 focus:outline-none">
+                    <i class="fa fa-times mr-2"></i>再考虑
+                </button>
+            </div>
+        </main>
+        
+        <!-- 页脚 -->
+        <footer class="text-center text-gray-600 text-sm opacity-0" id="footer">
+            <p>用我全部的爱 &copy; <span id="current-year"></span></p>
+        </footer>
+    </div>
+    
+    <!-- 成功告白弹窗 -->
+    <div id="confession-modal" class="fixed inset-0 bg-black/70 flex items-center justify-center z-50 hidden opacity-0 transition-opacity duration-300">
+        <div class="bg-white rounded-2xl p-6 w-[90%] max-w-md transform scale-95 transition-transform duration-300">
+            <div class="text-center">
+                <div class="text-5xl text-love mb-4 heart-beat">
+                    <i class="fa fa-heart"></i>
+                </div>
+                <h2 class="font-romantic text-2xl md:text-3xl text-love-dark mb-4">我就知道！</h2>
+                <p class="text-base mb-6">
+                    我爱你，胜过一切。从今以后，让我们一起创造更多美好的回忆吧！
+                </p>
+                <button id="close-modal" class="bg-love hover:bg-love-dark text-white font-bold py-3 px-6 rounded-full shadow transition-all duration-300 w-full">
+                    永远在一起
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 设置当前年份
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        // 页面加载动画
+        window.addEventListener('DOMContentLoaded', () => {
+            // 延迟动画，营造逐步展现效果
+            setTimeout(() => {
+                document.getElementById('header').classList.add('animate-fadeIn');
+            }, 300);
+            
+            setTimeout(() => {
+                document.getElementById('main-content').classList.add('animate-slideUp');
+            }, 800);
+            
+            setTimeout(() => {
+                document.getElementById('footer').classList.add('animate-fadeIn');
+            }, 1500);
+            
+            // 创建随机爱心装饰
+            createHearts();
+        });
+        
+        // 创建随机爱心装饰
+        function createHearts() {
+            const container = document.getElementById('hearts-container');
+            const colors = ['#FF69B4', '#FFB6C1', '#DDA0DD', '#87CEFA'];
+            const count = 8; // 手机端减少爱心数量，避免拥挤
+            
+            for (let i = 0; i < count; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart-decoration float';
+                heart.innerHTML = '<i class="fa fa-heart"></i>';
+                
+                // 随机样式
+                const size = Math.random() * 18 + 10; // 手机端爱心尺寸更小
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                const left = Math.random() * 100;
+                const top = Math.random() * 100;
+                const delay = Math.random() * 5;
+                const duration = Math.random() * 8 + 8;
+                
+                heart.style.cssText = `
+                    font-size: ${size}px;
+                    color: ${color};
+                    left: ${left}%;
+                    top: ${top}%;
+                    animation-delay: ${delay}s;
+                    animation-duration: ${duration}s;
+                `;
+                
+                container.appendChild(heart);
+            }
+        }
+        
+        // 按钮交互
+        const yesBtn = document.getElementById('yes-btn');
+        const noBtn = document.getElementById('no-btn');
+        const modal = document.getElementById('confession-modal');
+        const closeModal = document.getElementById('close-modal');
+        
+        // "我愿意"按钮点击事件
+        yesBtn.addEventListener('click', () => {
+            modal.classList.remove('hidden');
+            // 触发弹窗动画
+            setTimeout(() => {
+                modal.style.opacity = '1';
+                modal.querySelector('div').style.transform = 'scale(1)';
+            }, 10);
+        });
+        
+        // "再考虑"按钮交互 - 优化触摸设备体验
+        function moveButton() {
+            const btnRect = noBtn.getBoundingClientRect();
+            const windowWidth = window.innerWidth;
+            const windowHeight = window.innerHeight;
+            
+            // 计算新位置，确保按钮在视窗内
+            let newX = Math.random() * (windowWidth - btnRect.width - 40) + 20;
+            let newY = Math.random() * (windowHeight - btnRect.height - 120) + 60;
+            
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = `${newX}px`;
+            noBtn.style.top = `${newY}px`;
+        }
+        
+        // 同时监听鼠标和触摸事件
+        noBtn.addEventListener('mouseover', moveButton);
+        noBtn.addEventListener('touchstart', (e) => {
+            e.preventDefault(); // 防止默认行为
+            moveButton();
+        }, { passive: false });
+        
+        // 关闭弹窗
+        closeModal.addEventListener('click', () => {
+            modal.style.opacity = '0';
+            modal.querySelector('div').style.transform = 'scale(0.95)';
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        });
+        
+        // 添加渐入和上滑动画
+        document.head.insertAdjacentHTML('beforeend', `
+            <style>
+                @keyframes fadeIn {
+                    from { opacity: 0; }
+                    to { opacity: 1; }
+                }
+                @keyframes slideUp {
+                    from { transform: translateY(30px); opacity: 0; }
+                    to { transform: translateY(0); opacity: 1; }
+                }
+                .animate-fadeIn {
+                    animation: fadeIn 1s ease-in forwards;
+                }
+                .animate-slideUp {
+                    animation: slideUp 0.8s ease-out forwards;
+                }
+            </style>
+        `);
+    </script>
+</body>
+</html>
